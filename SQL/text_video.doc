@@ -1,0 +1,34 @@
+Mime-Version: 1.0
+Content-Base: https://online-bloknot.ru/
+Content-Type: Multipart/related; boundary="NEXT.ITEM-BOUNDARY";type="text/html"
+
+--NEXT.ITEM-BOUNDARY
+Content-Type: text/html; charset="utf-8"
+Content-Location: https://online-bloknot.ru/
+
+<!DOCTYPE html>
+<html xmlns:o="urn:schemas-microsoft-com:office:office" 
+xmlns:w="urn:schemas-microsoft-com:office:word" 
+xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:View>Print</w:View>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+
+</style>
+</head>
+<body><div style="font-family:Calibri,sans-serif;font-size:11pt;"><p>Здравствуйте, сегодня мы рассмотрим выполнение SQL запросов используя современную библиотеку анализа и визуализации данных Pandas. Для начала:<br>1) Заходим на мой github по ссылке:<br>2) Качаем необходимый файл data.sqlite в котором хранится нужная нам база для работы<br><br>Далее. Я использую гугл колаб, вы можете использовать например <strong>PyCharm </strong>или <strong>Kaggle</strong>.<br><br>Для начала подключаем библиотеку pandas, представим ее в качестве pd<br>Подключим библиотеку <strong>SQLITE3 </strong>для работы с локальной базой данных<br>&nbsp;</p><p>Далее - создаем переменную в которой будет хранится подключение, для выполнения SQL запросов, представляющую собой в каком-то роде хэндл.<br><br>Создадим датафрейм для чтения SQL запроса методом&nbsp;<strong>read_sql_query</strong><br>В общем выполнение выглядит в такой форме:<br><br>Вначале в кавычках пишется оригинальная SQL команда, далее через запятую второй аргумент, в качестве которого выступает наша переменная с подключением<strong> con</strong><br><br>После формирования запроса - выводим результат командой df или print(df)<br><br>В запросе указано, что выбраны все данные из таблицы <strong>lvl_base </strong>отсортированных по колонке <strong>value</strong>, с параметром <strong>DESC,&nbsp;</strong>указывающим, что сортировка выполнена по возрастанию<br><br>Переходим к следующему запросу. Этот запрос более объемный, т.к. содержит дополнительные подзапросы, используя ключевой столбец <strong>steam</strong>. В запросе указано, что выбираются все данные из таблицы <strong>lvl_base </strong>с условием, что в по колонке <strong>steam </strong>содержится данный <strong>STEAMID</strong>. Внутри указываются подзапросы к соседним таблицам для выбора данных по тому же <strong>ID</strong>, для этого мы в условии ставим <strong>steam = lvl_base.steam</strong>. Т.к. здесь проблема с отображением названия таблиц при таком запросе, чтобы названия колонок были правильные - после выбора каждой колонки - указываем ее название через <strong>AS</strong>, то есть представляем. Далее выводим результат, в котором выведены все данные по текущему <strong>STEAMID</strong><br><br>Следующий запрос и в нем мы видим ключевые параметры по которым он будет выполняться:&nbsp;<strong>ORDER&nbsp;BY&nbsp;</strong><strong>value&nbsp;DESC&nbsp;LIMIT&nbsp;10</strong><br><br>Этот запрос похож на предыдущие&nbsp;своим основным содержимым, но здесь уже вывод данных осуществляется прямым условием со знаком неравенства. Для вывода всех игроков, у которых значение <strong>value </strong>больше <strong>3000000 </strong>-<strong>&nbsp;</strong>мы используем условие <strong>where value &gt; 3000000 </strong>и выводим результат<br><br>Следующий запрос содержит в себе 2 подзапроса с которых мы получим код страны и само название страны. В&nbsp;целом это такой же запрос, но взяты уже конкретные столбцы: это&nbsp;<strong>steam </strong>из <strong>lvl_base </strong>и код страны со страной из <strong>lvl_base_geoip</strong>, условие указывается содержимым столбца <strong>steam </strong>т.е. нашим <strong>steamID</strong>. Выводим результат.<br><br>И последний запрос в этом блокноте - это вывод всех кто из России, указанием в качестве условия содержимое колонки <strong>Country </strong>Россией <strong>Russia</strong><br><br>Далее, для визуализации я подготовил небольшой пример. Для него нам потребуется дополнительная библиотека <strong>MATPLOTLIB</strong>, которую мы представим в виде <strong>plt</strong>. Проделываем все теже действия как и с обычными запросами.</p><p><br>Ниже представлены 4 вида графиков, в целом их намного больше.<br>В первом можем увидеть разброс данных в виде своеобразных точек, расположенных относительно двух осей. Также мы выставили ограничения по этим осям - это от <strong>0</strong> до <strong>50000 </strong>и от <strong>0</strong> до <strong>5000000 </strong>по <strong>X</strong> и <strong>Y</strong> соответственно, т.к. у нас всего <strong>47205 </strong>строк с данными и максимальное значение в колонке <strong>value </strong>меньше <strong>5000000</strong>, но близка к нему. В качестве осей выбираем <strong>ID </strong>и <strong>value</strong>, вид визуализации(<strong>kind</strong>) установим scatter.<br><br>Следующий график представляет из себя туже самую картину, но будто бы просто соединенную&nbsp;линиями. Имеет параметр визуализации&nbsp;<strong>line</strong><br><br>В следующем графике представлен вертикальный разброс задающийся параметром визуализации&nbsp;<strong>box</strong><br><br>И в последнем мы видим схожий со вторым график, в котором относительно центральной оси закрашивается каждая ступень.&nbsp;Имеет параметр визуализации <strong>area</strong><br><br>На сегодня все, всем удачи, всем пока!</p></div></body></html>
+--NEXT.ITEM-BOUNDARY--
